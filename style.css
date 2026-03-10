@@ -1,0 +1,165 @@
+/* ПУНКТ 3: Изменение фона и цвета всей секции */
+.arcade-section {
+    background-color: #050505;
+    padding: 30px;
+    border: 2px solid #333;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* ПУНКТ 4: Свойства шрифта и свечение для заголовка */
+.arcade-section h2 {
+    font-family: 'Courier New', Courier, monospace; /* Ретро-шрифт */
+    color: #ff00ff; /* Неоновый розовый */
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; /* Эффект свечения */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* ПУНКТ 2: Оформление текста абзаца */
+.arcade-section p {
+    color: #00ffff; /* Циановый цвет */
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* ПУНКТ 5: Оформление списка */
+.pixel-list {
+    list-style: none; /* Убираем стандартные маркеры */
+    padding-left: 20px;
+}
+
+.pixel-list li {
+    margin-bottom: 15px;
+    color: #eeeeee;
+    position: relative;
+}
+
+/* Добавляем кастомный маркер в виде пикселя через псевдоэлемент */
+.pixel-list li::before {
+    content: "■"; 
+    color: gold;
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Выделение имен персонажей */
+.char-name {
+    font-weight: bold;
+    color: gold;
+    border-bottom: 1px dashed gold;
+}
+
+/* ПУНКТ 2 и 3: Креативная разделительная линия */
+.neon-line {
+    border: none;
+    height: 3px;
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
+    box-shadow: 0 0 10px #00ffff;
+}
+
+/* Применится ко всем абзацам <p> на сайте  СЕЛЕКТОР ПО ЭЛЕМЕНТУ*/
+p {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.5;
+    color: #cccccc;
+}
+
+/* Применится только к элементам с class="retro-text" СЕЛЕКТОР ПО КЛАССУ*/
+.retro-text {
+    color: #00ff00; 
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Применится только к элементу с id="main-title" СЕЛЕКТОР ПО ИДЕНТИФИКАТОРУ*/
+#main-title {
+    font-size: 3em;
+    text-align: center;
+    color: gold;
+    border-bottom: 3px double gold;
+}
+
+/* Комбинированный (выбор ссылок внутри списков) */
+ul li a { 
+    text-decoration: none; 
+    color: gold; 
+    transition: color 0.2s; /* Плавный переход цвета */
+}
+
+/* Состояние при наведении*/
+ul li a:hover {
+    color: #fff; /* Белый при наведении */
+}
+
+
+/* посещенные ссылки тоже были темнее */
+ul li a:visited {
+    color: #8B4513; /* Цвет "старого золота" для уже открытых ссылок */
+}
+
+
+
+/* ПУНКТ 3: Современный фон с эффектом глубины */
+.modern-section {
+    background: rgba(255, 255, 255, 0.05); /* Эффект полупрозрачного стекла */
+    backdrop-filter: blur(10px); /* Размытие фона за блоком */
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 30px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ПУНКТ 4: Современный минималистичный шрифт для заголовка */
+.modern-section h2 {
+    font-family: 'Verdana', sans-serif;
+    color: #00ffff; /* Яркий циановый (VR-стиль) */
+    letter-spacing: 1px;
+    text-align: left;
+    border-left: 5px solid #ff00ff; /* Розовый акцент слева */
+    padding-left: 15px;
+}
+
+/* ПУНКТ 2: Оформление текста */
+.modern-intro {
+    font-size: 1.1rem;
+    color: #ffffff;
+    font-weight: 300;
+    font-style: italic; /* ПУНКТ 4: Написание */
+}
+
+/* ПУНКТ 5: Оформление нумерованного списка (Римские цифры) */
+.modern-list {
+    counter-reset: my-counter; /* Создаем кастомный счетчик для красоты */
+    list-style: none;
+    padding-left: 0;
+}
+
+.modern-list li {
+    background: rgba(0, 255, 255, 0.1);
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-right: 3px solid #00ffff;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Комбинированный селектор для выделения первой буквы или цифры */
+.modern-list li::before {
+    content: "ПУНКТ " counter(my-counter, upper-roman); /* ПУНКТ 5: Римские цифры */
+    counter-increment: my-counter;
+    color: #ff00ff;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 0.8rem;
+}
+
+/* ПУНКТ 3: Креативный разделитель */
+.vr-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, #ff00ff, transparent);
+    margin-bottom: 20px;
+}
