@@ -1,0 +1,17 @@
+// 1. Сначала объявляем свои переменные
+$primary: #b200b2;    // Твой новый основной цвет (например, фуксия)
+$info: #00ffff;       // Цвет для VR-секций
+$body-bg: #0a0a12;    // Фон страницы
+$body-color: #eeeeee; // Цвет текста
+
+// 2. Импортируем исходный Bootstrap
+@import "bootstrap-custom/bootstrap"; 
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/bootstrap";
+// 3. Твои дополнительные стили с использованием функций SCSS
+.custom-card {
+  background-color: lighten($primary, 20%); // Пример использования функции
+  border: 1px solid $info;
+}
