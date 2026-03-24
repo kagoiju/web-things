@@ -1,4 +1,4 @@
-/* ПУНКТ 3: Изменение фона и цвета всей секции */
+/* пр2 ПУНКТ 3: Изменение фона и цвета всей секции */
 .arcade-section {
     background-color: #050505;
     padding: 30px;
@@ -7,7 +7,7 @@
     margin-top: 20px;
 }
 
-/* ПУНКТ 4: Свойства шрифта и свечение для заголовка */
+/* пр2 ПУНКТ 4: Свойства шрифта и свечение для заголовка */
 .arcade-section h2 {
     font-family: 'Courier New', Courier, monospace; /* Ретро-шрифт */
     color: #ff00ff; /* Неоновый розовый */
@@ -16,14 +16,14 @@
     letter-spacing: 3px;
 }
 
-/* ПУНКТ 2: Оформление текста абзаца */
+/* пр2 ПУНКТ 2: Оформление текста абзаца */
 .arcade-section p {
     color: #00ffff; /* Циановый цвет */
     font-size: 1.1em;
     line-height: 1.6;
 }
 
-/* ПУНКТ 5: Оформление списка */
+/* пр2 ПУНКТ 5: Оформление списка */
 .pixel-list {
     list-style: none; /* Убираем стандартные маркеры */
     padding-left: 20px;
@@ -50,7 +50,7 @@
     border-bottom: 1px dashed gold;
 }
 
-/* ПУНКТ 2 и 3: Креативная разделительная линия */
+/* пр2 ПУНКТ 2 и 3: Креативная разделительная линия */
 .neon-line {
     border: none;
     height: 3px;
@@ -100,7 +100,7 @@ ul li a:visited {
 
 
 
-/* ПУНКТ 3: Современный фон с эффектом глубины */
+/* пр2 ПУНКТ 3: Современный фон с эффектом глубины */
 .modern-section {
     background: rgba(255, 255, 255, 0.05); /* Эффект полупрозрачного стекла */
     backdrop-filter: blur(10px); /* Размытие фона за блоком */
@@ -111,7 +111,7 @@ ul li a:visited {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* ПУНКТ 4: Современный минималистичный шрифт для заголовка */
+/* пр2 ПУНКТ 4: Современный минималистичный шрифт для заголовка */
 .modern-section h2 {
     font-family: 'Verdana', sans-serif;
     color: #00ffff; /* Яркий циановый (VR-стиль) */
@@ -121,7 +121,7 @@ ul li a:visited {
     padding-left: 15px;
 }
 
-/* ПУНКТ 2: Оформление текста */
+/* пр2 ПУНКТ 2: Оформление текста */
 .modern-intro {
     font-size: 1.1rem;
     color: #ffffff;
@@ -129,7 +129,7 @@ ul li a:visited {
     font-style: italic; /* ПУНКТ 4: Написание */
 }
 
-/* ПУНКТ 5: Оформление нумерованного списка (Римские цифры) */
+/* пр2 ПУНКТ 5: Оформление нумерованного списка (Римские цифры) */
 .modern-list {
     counter-reset: my-counter; /* Создаем кастомный счетчик для красоты */
     list-style: none;
@@ -156,10 +156,110 @@ ul li a:visited {
     font-size: 0.8rem;
 }
 
-/* ПУНКТ 3: Креативный разделитель */
+/* пр2 ПУНКТ 3: Креативный разделитель */
 .vr-divider {
     border: none;
     height: 1px;
     background: linear-gradient(to right, #ff00ff, transparent);
     margin-bottom: 20px;
+}
+
+/* --- ПРАКТИЧЕСКАЯ РАБОТА №3 --- */
+
+/* ПУНКТ 1: Абсолютное позиционирование */
+.header-container {
+    position: relative; 
+    height: 120px; /* Немного увеличим высоту для запаса */
+    width: 100%;
+}
+
+.abs-title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%); 
+    margin: 0;
+    color: white;
+    white-space: nowrap; /* Чтобы заголовок не переносился на узких экранах */
+}
+
+/* ПУНКТ 2: Фиксированное позиционирование */
+.btn-up {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #ff00ff;
+    color: white;
+    width: 35px; 
+    height: 35px;
+    padding: 0; /* Убираем падинг, так как центрируем через flex */
+    text-decoration: none;
+    border-radius: 50%;
+    box-shadow: 0 0 30px #ff00ff; 
+    z-index: 1000;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    font-size: 20px; 
+    line-height: 0; 
+}
+
+/* ПУНКТ 3: Комбинация относительного и абсолютного */
+.parent-box {
+    position: relative; 
+    width: 300px;
+    height: 100px;
+    background: #1a1a2e; 
+    border: 2px solid #00ffff;
+    margin: 60px auto; /* чтобы child-box не наезжал на другие блоки */
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+.child-box {
+    position: absolute; 
+    bottom: -20px;
+    right: -20px;
+    background: #ff00ff;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    border: 1px solid white;
+}
+
+/* ПУНКТ 4: 5 колонок с помощью Float */
+.column-container {
+    width: 100%;
+    margin-top: 30px;
+    /* Очистка потока внутри контейнера */
+}
+/*пространство без дивов*/
+.column-container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col {
+    float: left; 
+    width: 17%;  
+    margin: 1.5%;
+    background: #050505;
+    border: 1px solid gold;
+    text-align: center;
+    padding: 20px 0;
+    color: gold;
+    box-sizing: border-box; 
+}
+
+/* ПУНКТ 5: Применение свойства Clear и центрирование */
+.after-float-text {
+    clear: both; 
+    display: block; /* Гарантируем, что это блочный элемент */
+    text-align: center; 
+    padding: 30px 0;
+    color: #00ffdd;
+    font-weight: bold;
+    width: 100%; /* Занимает всю ширину, чтобы текст внутри центрировался */
 }

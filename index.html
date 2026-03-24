@@ -2,101 +2,126 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>История видеоигр: от первых пикселей до виртуальной реальности</title>
-    <link rel="stylesheet" href="style.css" title="Main Style">
-    <!-- <link rel="stylesheet" href="alt-style.css" id="main-theme"> -->
-    <meta name="description" content="Путешествие по эпохам видеоигр: от Pong до современных систем VR.">
-    <meta name="keywords" content="видеоигры, история игр, Pong, VR, консоли, гейминг">
-
-    <style>
-        body {
-            background-color: #0a0a12;
-            font-family: 'Verdana', sans-serif;
-        }
-        .intro-text {
-            color: #00ffff;
-            font-style: italic;
-        }
-    </style>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История видеоигр: от первых пикселей до VR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+<body class="bg-dark text-light">
 
-<body bgcolor="#0a0a12" text="#eeeeee" link="#00ffff" vlink="#ff00ff" background="https://img.freepik.com/free-vector/saturn-galaxy-gold-starry-sky-border-black-background_53876-98041.jpg">
-    <font face="Arial, sans-serif">
-        <h1 align="center">Эволюция видеоигр</h1>
-        <!-- встраивание -->
-        <h1 style="color: gold; text-align: center; text-transform: uppercase;">
-    Эволюция видеоигр
-</h1>
-        <blockquote>
-            <h3>Содержание:</h3>
-            <ul>
-                <li><a href="#begin">Зарождение: Эпоха Pong</a></li>
-                <li><a href="#golden">Золотой век аркад и консолей</a></li>
-                <li><a href="#modern">Современность и технологии VR</a></li>
-                <li><a href="#links">Полезные ресурсы</a></li>
-            </ul>
-        </blockquote>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top border-bottom border-primary">
+        <div class="container">
+            <a class="navbar-brand text-info" href="#"><i class="bi bi-controller"></i> GameHistory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#begin">Эпоха Pong</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#golden">Золотой век</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#modern">VR Технологии</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-info ms-lg-3" href="order.html">Оформить заказ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        <hr size="5" color="gold" width="80%"> <h2 id="begin">Зарождение: Эпоха Pong</h2>
-        <p>
-            История видеоигр началась не в уютных гостиных, а в научных лабораториях.
-            Первые игры были простыми точками на осциллографах.
-        </p>
-        <img src="https://media.tenor.com/jJr0cRvWu0UAAAAM/pong-videogame.gif" width="300" alt="Игра Pong" border="2">
-        <p>
-            <font size="+1" face="Courier New" color="#00ff00">
-                Легендарная игра <b>Pong</b> (1972) от компании Atari стала первым коммерчески успешным проектом.
-                Это был симулятор настольного тенниса, состоящий из двух линий и квадратика-мяча.
-            </font>
-        </p>
+    <div class="container py-5">
+        
+        <header class="text-center mb-5">
+            <h1 class="display-3 text-warning">Эволюция видеоигр</h1>
+            <p class="lead">Путешествие по эпохам: от Pong до современных систем VR.</p>
+        </header>
 
-        <p class="retro-text">Я люблю эпоху 80-х</p>
-     
+        <section class="mb-5">
+            <h2 class="text-center mb-4">Этапы разработки игры</h2>
+            <div class="row g-3 text-center">
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="p-3 border border-info rounded bg-opacity-10 bg-info">
+                        <i class="bi bi-lightbulb fs-2 d-block mb-2"></i> Идея
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="p-3 border border-info rounded bg-opacity-10 bg-info">
+                        <i class="bi bi-palette fs-2 d-block mb-2"></i> Дизайн
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="p-3 border border-info rounded bg-opacity-10 bg-info">
+                        <i class="bi bi-code-slash fs-2 d-block mb-2"></i> Код
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-4"> <div class="p-3 border border-warning rounded bg-opacity-10 bg-warning text-warning">
+                        <i class="bi bi-bug fs-2 d-block mb-2"></i> Глобальный Тест
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                    <div class="p-3 border border-success rounded bg-opacity-10 bg-success">
+                        <i class="bi bi-rocket-takeoff fs-2 d-block mb-2"></i> Релиз
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="arcade-section">
-    <hr class="neon-line"> 
-    <h2 id="golden">Золотой век аркад и консолей</h2>
-    <p>В 80-е годы мир захлестнула «игровая лихорадка». Появились персонажи, которые стали иконами поп-культуры.</p>
-    
-    <ul class="pixel-list">
-        <li><span class="char-name">Pac-Man</span> — игра, покорившая аудиторию всех возрастов.</li>
-        <li><span class="char-name">Super Mario Bros</span> — установила стандарты жанра платформер.</li>
-        <li><span class="char-name">Tetris</span> — головоломка, созданная в СССР.</li>
-    </ul>
-</div>
+        <div class="row align-items-center mb-5" id="begin">
+            <div class="col-md-6">
+                <h2 class="text-info border-bottom pb-2">Зарождение: Эпоха Pong</h2>
+                <p>История видеоигр началась не в уютных гостиных, а в научных лабораториях. Первые игры были простыми точками на осциллографах.</p>
+                <div class="p-3 bg-dark border-start border-success border-4 mb-3">
+                    <code class="text-success fs-5">Легендарная игра Pong (1972) от Atari стала первым коммерческим успехом.</code>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="https://media.tenor.com/jJr0cRvWu0UAAAAM/pong-videogame.gif" class="img-fluid rounded shadow-lg border border-secondary" alt="Pong">
+            </div>
+        </div>
 
+        <section class="my-5 p-4 bg-black rounded shadow" id="golden">
+            <h2 class="text-magenta mb-4">Золотой век аркад</h2>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover table-striped border-info">
+                    <thead class="table-info">
+                        <tr>
+                            <th>Игра</th>
+                            <th>Год</th>
+                            <th>Особенность</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Pac-Man</td><td>1980</td><td>Культовый персонаж</td></tr>
+                        <tr><td>Super Mario</td><td>1985</td><td>Стандарт платформеров</td></tr>
+                        <tr><td>Tetris</td><td>1984</td><td>Создано в СССР</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-        <p align="right">
-            <font size="-1"><i>Интересный факт: Первый игровой автомат Pac-Man не имел конца, но из-за ошибки в коде 256-й уровень был непроходим.</i></font>
-        </p>
-        <hr noshade size="10" width="50%" color="#ff00ff"> 
+        <section class="text-center my-5">
+            <h3 class="mb-3">Узнать больше:</h3>
+            <div class="btn-group shadow" role="group">
+                <a href="https://www.igromania.ru/" class="btn btn-outline-primary">Игромания</a>
+                <a href="https://www.school-xyz.com/" class="btn btn-outline-primary">XYZ School</a>
+                <a href="https://www.youtube.com/@helicopterboss" class="btn btn-outline-primary">Ретро-игры</a>
+            </div>
+        </section>
 
-        <div class="modern-section">
-    <hr class="vr-divider">
-    <h2 id="modern">Современность и технологии VR</h2>
-    <p class="modern-intro">Сегодня игры — это фотореалистичные миры. Мы перешли от управления кнопками к полному погружению.</p>
-    
-    <ol class="modern-list">
-        <li>3D-ускорители и эпоха PlayStation.</li>
-        <li>Онлайн-баталии в MMORPG.</li>
-        <li>Виртуальная и дополненная реальность (VR/AR).</li>
-    </ol>
-</div>
+        <section class="row justify-content-center my-5">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-info border-info text-white" id="basic-addon1">@</span>
+                    <input type="text" class="form-control bg-dark text-white border-info" placeholder="Подписка на новости (Email)">
+                    <button class="btn btn-info text-white" type="button">OK</button>
+                </div>
+            </div>
+        </section>
 
-        <img src="https://img.freepik.com/free-photo/computer-mobile-device-computer-graphic-casual-digital_1134-680.jpg" width="400" alt="VR технологии">
-        <p>
-            <font size="5" face="Verdana">
-                Будущее уже здесь: с помощью шлемов VR игрок может буквально «шагнуть» внутрь игры.
-            </font>
-        </p>
-        <hr align="left" width="30%">
-        <h3 id="links">Узнать больше об истории игр:</h3>
-        <ul>
-            <li><a href="https://www.igromania.ru/" target="_blank">Игромания</a></li>
-            <li><a href="https://www.school-xyz.com/" target="_blank">Онлайн школа разработки игр</a></li>
-            <li><a href="https://www.youtube.com/@helicopterboss" target="_blank">Ютуб канал по миру ретро-игр</a></li>
-        </ul>
-    </font>
+    </div>
+
+    <a href="#" class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 shadow-lg" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; z-index: 1050;">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
