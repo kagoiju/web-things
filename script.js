@@ -165,10 +165,10 @@ Array.prototype.average = function() {
     var sum = 0;
     for (var i = 0; i < this.length; i++) {
         sum += this.length[i] || 0; // На всякий случай проверка на число
-        // Но лучше просто:
+        // можно просто:
         // sum += this[i];
     }
-    // Используем более надежный вариант через reduce
+    // более надежный вариант через reduce
     var total = this.reduce(function(a, b) { return a + b; }, 0);
     return total / this.length;
 };
@@ -180,10 +180,81 @@ function demoPrototypeExtension() {
     console.log("Средняя оценка: " + ratings.average());
 }
 
-// Общая функция для запуска всех демонстраций (вызови её кнопкой)
+//  для запуска 
 function runLab8() {
     demoObjects();
     demoConstructor();
     demoPrototypeExtension();
     alert("Проверки ЛР8 выполнены. Результаты в консоли (F12)!");
 }
+
+
+
+/**
+ * ЛАБОРАТОРНАЯ РАБОТА №9: Динамическое изменение DOM
+ */
+
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Выборка элементов (разными способами по заданию)
+    var addButton = document.getElementById("add-task-btn"); // По ID
+    var taskInput = document.querySelector("#task-input");   // По селектору
+    var taskList = document.querySelector(".list-group");    // По классу
+
+    // 2. Функция добавления нового элемента
+    function addNewTask() {
+        var text = taskInput.value.trim();
+        
+        if (text === "") {
+            alert("Введите название!");
+            return;
+        }
+
+        // Создаем новый элемент списка <li>
+        var li = document.createElement("li");
+        li.className = "list-group-item bg-black text-white border-secondary d-flex justify-content-between align-items-center";
+        
+        // Создаем текстовый узел для безопасного добавления текста
+        var textNode = document.createTextNode(text);
+        li.appendChild(textNode);
+
+        // Создаем кнопку удаления
+        var removeBtn = document.createElement("button");
+        removeBtn.innerHTML = "Удалить";
+        removeBtn.className = "btn btn-sm btn-danger";
+        
+        // Регистрация события удаления через addEventListener
+        removeBtn.addEventListener("click", function() {
+            // Демонстрация удаления узла
+            li.remove(); 
+            console.log("Узел удален: " + text);
+        });
+
+        // Добавляем кнопку в li, а li в список
+        li.appendChild(removeBtn);
+        taskList.appendChild(li);
+
+        // Очищаем поле ввода
+        taskInput.value = "";
+        console.log("Добавлен новый узел: " + text);
+    }
+
+    // 3. Регистрация события клика на основную кнопку
+    if (addButton) {
+        addButton.addEventListener("click", addNewTask);
+    }
+
+    // Дополнительно: добавление по нажатию Enter
+    taskInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            addNewTask();
+        }
+    });
+
+    // Работа с уже существующими кнопками (делегирование или прямой обход)
+    var initialRemoveBtns = document.querySelectorAll(".btn-remove");
+    initialRemoveBtns.forEach(function(btn) {
+        btn.addEventListener("click", function() {
+            this.closest("li").remove();
+        });
+    });
+});
