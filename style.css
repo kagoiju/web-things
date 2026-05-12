@@ -1,3 +1,71 @@
+/* Переменные для неонового стиля 80-х */
+:root {
+    --neon-pink: #ff00ff;
+    --neon-blue: #00f2ff;
+    --neon-yellow: #fff200;
+    --bg-deep: #0d0221;
+    --bg-gradient: #240b36;
+}
+
+body {
+    background-color: var(--bg-deep);
+    font-family: 'Courier New', monospace;
+    background-image: linear-gradient(to bottom, var(--bg-deep) 0%, var(--bg-gradient) 100%);
+    min-height: 100vh;
+    color: #fff;
+}
+
+/* Стили карточки (терминала) */
+.neon-card {
+    border: 2px solid var(--neon-blue) !important;
+    box-shadow: 0 0 15px var(--neon-blue), inset 0 0 5px var(--neon-blue);
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+
+.neon-text {
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Поля ввода */
+.form-control, .form-select, .form-check-input {
+    background-color: #1a1a1a !important;
+    border: 1px solid var(--neon-blue) !important;
+    color: #fff !important;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 10px var(--neon-blue) !important;
+    border-color: var(--neon-pink) !important;
+}
+
+/* Кнопки и их состояния (ПР10) */
+#submit-btn {
+    transition: all 0.5s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-invalid {
+    filter: grayscale(1);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-valid {
+    background-color: var(--neon-yellow) !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px var(--neon-yellow);
+    border: none;
+}
+
+.btn-valid:hover {
+    background-color: #fff !important;
+    box-shadow: 0 0 30px var(--neon-yellow);
+}
+
 /* Стили для плавного и ровного листания картинок */
 #dynamic-img {
     width: 100%;             /* Растягиваем по ширине колонки */
