@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// ЛАБОРАТОРНАЯ РАБОТА №10: ФОРМЫ
+/* ЛАБОРАТОРНАЯ РАБОТА №10: ФОРМЫ
 
 document.addEventListener("DOMContentLoaded", function() {
     // Получаем доступ к форме по имени и элементам по ID
@@ -370,6 +370,132 @@ document.addEventListener("DOMContentLoaded", function() {
             setTimeout(function() {
                 timeContainer.style.display = 'none';
                 deliveryScheduled.disabled = true;
+                validateForm();
+            }, 10);
+        }
+    });
+}); */ 
+
+// --- ЛАБОРАТОРНАЯ РАБОТА №11: jQuery ---
+
+$(document).ready(function() {
+    // Получаем элементы через jQuery-селекторы
+    var $form = $('#retroForm');
+    var $submitBtn = $('#submit-btn');
+    var $timeContainer = $('#timePickerContainer');
+    var $deliveryScheduled = $('#deliveryScheduled');
+    var $labelScheduled = $('#labelScheduled');
+    var $giftMessage = $('#giftMessage');
+    var $isGift = $('#isGift');
+    var $sendTime = $('#sendTime');
+
+    if ($form.length === 0) return;
+
+    // 1. Логика переключателя "Это подарок" (зависимости элементов)
+    $isGift.on('change', function() {
+        var isGift = this.checked;
+        
+        // Блокировка/разблокировка поля сообщения
+        $giftMessage.prop('disabled', !isGift);
+        if (!isGift) $giftMessage.val("");
+
+        // Управление доступом к режиму "Ко времени"
+        $deliveryScheduled.prop('disabled', !isGift);
+        
+        if (isGift) {
+            $labelScheduled.removeClass('text-secondary').addClass('text-danger');
+        } else {
+            $labelScheduled.addClass('text-secondary').removeClass('text-danger');
+            // Если не подарок - принудительно возвращаем режим "Мгновенно"
+            $('input[name="delivery"][value="instant"]').prop('checked', true);
+            $timeContainer.hide();
+        }
+        validateForm();
+    });
+
+    // 2. Показ выбора времени при переключении радиокнопок
+    $form.on('change', 'input[name="delivery"]', function() {
+        if ($(this).val() === 'scheduled') {
+            $timeContainer.show();
+        } else {
+            $timeContainer.hide();
+        }
+        validateForm();
+    });
+
+    // 3. Валидация формы в реальном времени
+    function validateForm() {
+        var nameValid = $('input[name="userName"]').val().trim().length >= 2;
+        var emailValid = $('input[name="userEmail"]').val().includes('@');
+        var gameSelected = $('#hardware').val() !== null && $('#hardware').val() !== "";
+        
+        // Проверка времени, если выбран запланированный подарок
+        var timeValid = true;
+        var currentDelivery = $('input[name="delivery"]:checked').val();
+        if (currentDelivery === 'scheduled' && $isGift.prop('checked')) {
+            timeValid = $sendTime.val() !== "";
+        }
+
+        var isValid = nameValid && emailValid && gameSelected && timeValid;
+
+        // Изменение стиля и текста кнопки с помощью jQuery методов классов
+        if (isValid) {
+            $submitBtn.text("ПОДТВЕРДИТЬ ТРАНЗАКЦИЮ")
+                      .removeClass('btn-invalid')
+                      .addClass('btn-valid')
+                      .prop('disabled', false);
+        } else {
+            $submitBtn.text("ОЖИДАНИЕ ДАННЫХ...")
+                      .removeClass('btn-valid')
+                      .addClass('btn-invalid')
+                      .prop('disabled', true);
+        }
+    }
+
+    // Слушатели событий через метод .on() для мгновенной валидации
+    $('input[name="userName"], input[name="userEmail"]').on('input', validateForm);
+    $('#hardware, #sendTime').on('change', validateForm);
+
+    // 4. Сбор данных в объект и обработка Submit
+    $form.on('submit', function(e) {
+        e.preventDefault(); // Останавливаем стандартную отправку формы
+
+        var selectedGameText = $('#hardware').find('option:selected').text();
+        var currentDelivery = $('input[name="delivery"]:checked').val();
+
+        var orderData = {
+            user: $('input[name="userName"]').val(),
+            game: selectedGameText,
+            isGift: $isGift.prop('checked'),
+            delivery: currentDelivery,
+            time: (currentDelivery === 'scheduled') ? $sendTime.val() : "мгновенно",
+            message: $giftMessage.val(),
+            timestamp: new Date().toLocaleString()
+        };
+
+        console.log("--- ОТЧЕТ ПО ЗАКАЗУ (ПР11 через jQuery) ---");
+        console.table(orderData);
+
+        // Финальный вывод пользователю
+        if (!orderData.isGift) {
+            alert("Транзакция завершена! Игра " + orderData.game + " в библиотеке.");
+        } else {
+            var msg = orderData.delivery === 'instant' ? "мгновенно" : "в " + orderData.time;
+            alert("Подарок оформлен! " + msg);
+        }
+    });
+
+    // 5. Обработчик события Reset
+    $form.on('reset', function(e) {
+        if (!confirm("Действительно очистить форму?")) {
+            e.preventDefault();
+        } else {
+            // Таймаут для выполнения валидации после фактического сброса полей
+            setTimeout(function() {
+                $timeContainer.hide();
+                $deliveryScheduled.prop('disabled', true);
+                $labelScheduled.addClass('text-secondary').removeClass('text-danger');
+                $giftMessage.prop('disabled', true);
                 validateForm();
             }, 10);
         }
