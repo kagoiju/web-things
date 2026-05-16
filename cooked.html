@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пр13: Клиентские Cookies</title>
+    <style>
+        body { background: #0f051d; color: #fff; font-family: sans-serif; text-align: center; padding: 40px; margin: 0; }
+        .window { 
+            max-width: 400px; margin: 50px auto 0 auto; background: #1a0b2e; 
+            border: 2px solid #00ffff; box-shadow: 0 0 15px #00ffff; 
+            padding: 30px; border-radius: 8px; 
+        }
+        h2 { color: #ff007f; text-shadow: 0 0 10px #ff007f; margin-top: 0; }
+        input, select, button { 
+            width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; 
+            border-radius: 4px; border: 1px solid #ff007f; font-size: 16px; 
+        }
+        input, select { background: #0f051d; color: #fff; }
+        button { 
+            background: #ff007f; color: white; font-weight: bold; 
+            cursor: pointer; box-shadow: 0 0 5px #ff007f; border: none;
+            transition: 0.2s;
+        }
+        button:hover { background: #ff3399; box-shadow: 0 0 12px #ff007f; }
+        button.btn-del { background: transparent; border: 2px solid #ffaa00; color: #ffaa00; box-shadow: none; }
+        button.btn-del:hover { background: rgba(255, 170, 0, 0.1); }
+        #greeting { color: #00ffff; font-weight: bold; min-height: 24px; margin-top: 15px; }
+
+        /* Стиль для User-Friendly уведомления */
+        .toast-notification {
+            position: fixed;
+            top: -100px; /* Изначально прячем выше экрана */
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00ffff;
+            color: #0f051d;
+            padding: 15px 30px;
+            font-weight: bold;
+            border-radius: 30px;
+            box-shadow: 0 0 20px #00ffff;
+            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Эффект прыжка */
+            z-index: 1000;
+        }
+        .toast-notification.show {
+            top: 20px; /* Выезжает сверху */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toast" class="toast-notification">Настройки профиля успешно сохранены в Cookies!</div>
+
+    <div class="window">
+        <h2>Настройки Профиля</h2>
+        <div id="greeting"></div>
+
+        <form id="profile-form">
+            <input type="text" id="username" placeholder="Ваш никнейм (например: Маша)" required>
+            
+            <select id="fav-game">
+                <option value="Dota2">Dota 2</option>
+                <option value="Peak">Peak</option>
+                <option value="Subnautica2">Subnautica 2</option>
+            </select>
+
+            <button type="submit">Сохранить выбор</button>
+        </form>
+        <button class="btn-del" id="btn-clear">Сбросить настройки</button>
+    </div>
+
+    <script>
+        
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toGMTString();
+            }
+            document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + encodeURIComponent(name).replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : null;
+        }
+
+        function delCookie(name) {
+            document.cookie = encodeURIComponent(name) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+        }
+
+
+        const form = document.getElementById('profile-form');
+        const greetingDiv = document.getElementById('greeting');
+        const toast = document.getElementById('toast');
+
+        function checkUserPrefs() {
+            let user = getCookie("username");
+            let game = getCookie("favGame");
+
+            if (user && game) {
+                greetingDiv.textContent = `Привет, ${user}! Твоя игра: ${game}`;
+                document.getElementById('username').value = user;
+                document.getElementById('fav-game').value = game;
+            } else {
+                greetingDiv.textContent = "Добро пожаловать! Пожалуйста, представьтесь.";
+            }
+        }
+
+        // Функция для демонстрации сообщения
+        function showNotification() {
+            toast.classList.add('show'); 
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Обработчик формы (Сохранение)
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let userVal = document.getElementById('username').value;
+            let gameVal = document.getElementById('fav-game').value;
+
+            setCookie("username", userVal, 7);
+            setCookie("favGame", gameVal, 7);
+
+            checkUserPrefs(); 
+            showNotification(); // Запуск уведомления
+        });
+
+        // Обработчик удаления
+        document.getElementById('btn-clear').addEventListener('click', function() {
+            delCookie("username");
+            delCookie("favGame");
+            form.reset();
+            checkUserPrefs();
+        });
+
+        checkUserPrefs();
+    </script>
+</body>
+</html>
