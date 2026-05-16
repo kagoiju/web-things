@@ -376,10 +376,104 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 }); */ 
 
+$(document).ready(function() {
+
+    // ==========================================
+    // 1. Расширение объекта jQuery.fx.speeds
+    // ==========================================
+    // Переопределим стандартную скорость 'fast' (сделаем её супер-быстрой)
+    jQuery.fx.speeds.fast = 150;
+    
+    // Создаем новую фирменную скорость 'neonSlow' для плавных неоновых переходов
+    jQuery.fx.speeds.neonSlow = 2000;
+
+
+    // ==========================================
+    // 2. Встроенные эффекты (Взаимодействие с кнопками)
+    // ==========================================
+    
+    // Слайд-эффект с использованием стандартной скорости
+    $('#btn-toggle').click(function() {
+        $('.game-card').slideToggle('normal');
+    });
+
+    // Плавное скрытие с измененной скоростью 'fast'
+    $('#btn-fade-out').click(function() {
+        $('.game-card').fadeOut('fast');
+    });
+
+    // Плавное появление с нашей кастомной скоростью 'neonSlow'
+    $('#btn-in-out', '#btn-fade-in').click(function() {
+        $('.game-card').fadeIn('neonSlow');
+    });
+
+
+    // ==========================================
+    // 3. Управление анимацией: Метод .stop()
+    // ==========================================
+    $('#btn-stop').click(function() {
+        // Останавливаем текущую анимацию, очищаем очередь и сразу завершаем её результат
+        $('.game-card').stop(true, true);
+    });
+
+
+    // ==========================================
+    // 4. Произвольные эффекты через .animate()
+    // ==========================================
+    $('#btn-glitch').click(function() {
+        // Делаем карточки "динамичными" (меняем отступы, прозрачность и размер шрифта)
+        // Названия свойств пишем в CamelCase (fontSize, paddingLeft)
+        $('.game-card').animate({
+            paddingLeft: '+=30px',
+            opacity: 0.5,
+            fontSize: '18px'
+        }, 600)
+        .delay(200) // Пауза (метод .delay)
+        .animate({
+            paddingLeft: '-=30px',
+            opacity: 1,
+            fontSize: '16px'
+        }, 400);
+    });
+
+
+    // ==========================================
+    // 5. Функция обратного вызова (Callback) и $(this)
+    // ==========================================
+    $('.btn-buy').click(function() {
+        // Эффект "схлопывания" нажатой кнопки
+        $(this).fadeOut(300, function() {
+            // Внутри callback-функции 'this' — это исходная кнопка.
+            // Обернем её в $(this), чтобы вернуть на место в новом дизайне
+            $(this).fadeIn(100).text('В корзине!').css({
+                'border-color': '#00ffff',
+                'color': '#00ffff',
+                'box-shadow': '0 0 10px #00ffff'
+            });
+
+            // Демонстрация уведомления-тоста с анимацией
+            $('.alert-toast')
+                .show() // Делаем элемент видимым для манипуляций
+                .animate({ bottom: '20px' }, 500) // Выезжает снизу
+                .delay(2000)                      // Ждет 2 секунды
+                .animate({ bottom: '-100px' }, 500); // Прячется обратно
+        });
+    });
+
+});
+
+
+
+
+
 // --- ЛАБОРАТОРНАЯ РАБОТА №11: jQuery ---
 
+
+//1
 $(document).ready(function() {
     // Получаем элементы через jQuery-селекторы
+    
+    //2
     var $form = $('#retroForm');
     var $submitBtn = $('#submit-btn');
     var $timeContainer = $('#timePickerContainer');
@@ -392,6 +486,8 @@ $(document).ready(function() {
     if ($form.length === 0) return;
 
     // 1. Логика переключателя "Это подарок" (зависимости элементов)
+    
+    //3
     $isGift.on('change', function() {
         var isGift = this.checked;
         
@@ -407,6 +503,8 @@ $(document).ready(function() {
         } else {
             $labelScheduled.addClass('text-secondary').removeClass('text-danger');
             // Если не подарок - принудительно возвращаем режим "Мгновенно"
+            
+            //4
             $('input[name="delivery"][value="instant"]').prop('checked', true);
             $timeContainer.hide();
         }
@@ -414,6 +512,8 @@ $(document).ready(function() {
     });
 
     // 2. Показ выбора времени при переключении радиокнопок
+    
+    //5
     $form.on('change', 'input[name="delivery"]', function() {
         if ($(this).val() === 'scheduled') {
             $timeContainer.show();
@@ -440,6 +540,7 @@ $(document).ready(function() {
 
         // Изменение стиля и текста кнопки с помощью jQuery методов классов
         if (isValid) {
+            //7
             $submitBtn.text("ПОДТВЕРДИТЬ ТРАНЗАКЦИЮ")
                       .removeClass('btn-invalid')
                       .addClass('btn-valid')
@@ -453,6 +554,8 @@ $(document).ready(function() {
     }
 
     // Слушатели событий через метод .on() для мгновенной валидации
+    
+//6
     $('input[name="userName"], input[name="userEmail"]').on('input', validateForm);
     $('#hardware, #sendTime').on('change', validateForm);
 
@@ -460,6 +563,7 @@ $(document).ready(function() {
     $form.on('submit', function(e) {
         e.preventDefault(); // Останавливаем стандартную отправку формы
 
+        //8
         var selectedGameText = $('#hardware').find('option:selected').text();
         var currentDelivery = $('input[name="delivery"]:checked').val();
 
@@ -473,7 +577,7 @@ $(document).ready(function() {
             timestamp: new Date().toLocaleString()
         };
 
-        console.log("--- ОТЧЕТ ПО ЗАКАЗУ (ПР11 через jQuery) ---");
+        console.log("ОТЧЕТ ПО ЗАКАЗУ (ПР11 через jQuery)");
         console.table(orderData);
 
         // Финальный вывод пользователю

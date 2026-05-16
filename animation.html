@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пр12: Neon jQuery Effects</title>
+    <style>
+        body { background: #0a0118; color: #fff; font-family: sans-serif; text-align: center; padding: 50px; }
+        h1 { text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f; }
+        .game-box { 
+            width: 200px; height: 200px; background: #120224; 
+            border: 3px solid #00ffff; box-shadow: 0 0 15px #00ffff; 
+            margin: 30px auto; padding: 20px; border-radius: 10px;
+        }
+        button { 
+            background: transparent; border: 2px solid #ff007f; color: #ff007f; 
+            padding: 10px 15px; cursor: pointer; font-weight: bold; margin: 5px;
+            box-shadow: 0 0 5px #ff007f;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+    <h1>NEON GAME ZONE</h1>
+    
+    <button id="btn-fade">FadeToggle (fx.speeds)</button>
+    <button id="btn-anim">Animate (Custom)</button>
+    <button id="btn-stop">Stop</button>
+
+    <div class="game-box">
+        <h3>Neon Invaders</h3>
+        <p>Нажми на кнопки выше для проверки эффектов.</p>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 1. Изменяем и расширяем объект fx.speeds
+            jQuery.fx.speeds.fast = 300;        // изменили стандартную
+            jQuery.fx.speeds.neonSlow = 2500;   // добавили свою собственную
+
+            // 2. Встроенный метод с кастомной скоростью
+            $('#btn-fade').click(function() {
+                $('.game-box').fadeToggle('neonSlow');
+            });
+
+            // 3. Метод .animate() + CamelCase свойства + callback-функция с $(this)
+            $('#btn-anim').click(function() {
+                $('.game-box').animate({
+                    borderWidth: '10px',
+                    opacity: 0.4,
+                    fontSize: '20px'
+                }, 'fast', function() {
+                    // Callback: возвращаем в исходное состояние после завершения
+                    $(this).animate({ borderWidth: '3px', opacity: 1, fontSize: '16px' }, 500);
+                });
+            });
+
+            // 4. Управление анимацией (.stop)
+            $('#btn-stop').click(function() {
+                $('.game-box').stop(true, true);
+            });
+        });
+    </script>
+</body>
+</html>
